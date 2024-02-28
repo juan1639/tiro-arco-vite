@@ -1,28 +1,43 @@
-import { Scene } from 'phaser';
+import { BotonNuevaPartida } from "../components/boton-nuevapartida.js";
+import { Textos } from "../components/textos.js";
+import { play_sonidos } from "../functions/functions.js";
 
-export class GameOver extends Scene
-{
-    constructor ()
-    {
-        super('GameOver');
-    }
+// ===========================================================================
+export class Gameover extends Phaser.Scene {
 
-    create ()
-    {
-        this.cameras.main.setBackgroundColor(0xff0000);
+  constructor() {
+    super({ key: 'gameover' });
+  }
 
-        this.add.image(512, 384, 'background').setAlpha(0.5);
+  init() {
+    this.botoninicio = new BotonNuevaPartida(this);
+    this.txt = new Textos(this);
 
-        this.add.text(512, 384, 'Game Over', {
-            fontFamily: 'Arial Black', fontSize: 64, color: '#ffffff',
-            stroke: '#000000', strokeThickness: 8,
-            align: 'center'
-        }).setOrigin(0.5);
+    this.sonidoGameOver = this.sound.add('gameover');
+  }
+  
+  create() {
 
-        this.input.once('pointerdown', () => {
+    const aparecerBoton = 2000;
 
-            this.scene.start('MainMenu');
+    const left = Math.floor(this.sys.game.config.width / 5.2);
+    const top = Math.floor(this.sys.game.config.height / 4.2);
 
-        });
-    }
+    this.txt.create({
+      x: left, y: top, texto: ' Game Over ',
+      size: 82, style: 'bold', oofx: 1, offy: 1, col: '#fff', blr: 15,
+      fillShadow: true, fll: '#e71', family: 'verdana, arial, sans-serif',
+      screenWidth: this.sys.game.config.width, multip: 1
+    });
+    
+    this.add.timeline([
+      {
+        at: aparecerBoton,
+        run: () => {
+            this.botoninicio.create('menuprincipal');
+            play_sonidos(this.sonidoGameOver, false, 0.9);
+        }
+      }
+    ]).play();
+  }
 }
