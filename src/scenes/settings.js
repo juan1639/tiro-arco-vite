@@ -20,6 +20,11 @@ export class Settings
     static incPuntos = 0;
     static hi = 238;
 
+    static aplausos = {
+        abucheos: 200,
+        aplausos: 400
+    };
+
     static pausas = {
         flechaClavada: 2800,
         showTxtInicial: 15000
@@ -107,6 +112,11 @@ export class Settings
     static getRecord()
     {
         return Settings.hi;
+    }
+
+    static getAplausos()
+    {
+        return Settings.aplausos;
     }
 
     static getCameraScores()

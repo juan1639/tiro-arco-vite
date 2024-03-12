@@ -1,4 +1,3 @@
-import { Settings } from "../scenes/settings.js";
 
 export class Marcador
 {
@@ -10,19 +9,30 @@ export class Marcador
 
     create()
     {
-        const { x, y, size, txt, color, id } = this.datos;
+        const {
+            x, y, txt,
+            size, color, style,
+            stroke, sizeStroke,
+            shadowOsx, shadowOsy, shadowColor,
+            bool1, bool2, origin,
+            elastic, dura
+        } = this.datos;
 
-        let texto = '';
-
-        if (id === 0) texto = `${txt}${Settings.getPuntos()}`;
-        if (id === 1) texto = `${txt}${Settings.getIncPuntos()}`;
-        if (id === 2) texto = `${txt}${Settings.getRecord()}`;
-
-        this.marcador = this.relatedScene.add.text(x, y, texto, {
-            fontSize: size + 'px', fill: color, fontFamily: 'verdana, arial, sans-serif', fontStyle: 'bold'
+        this.marcador = this.relatedScene.add.text(x, y, txt, {
+            fontSize: size + 'px',
+            fill: color,
+            fontFamily: 'verdana, arial, sans-serif',
+            fontStyle: style
         });
 
-        this.marcador.setDepth(Settings.depth.marcadores);
+        this.marcador.setOrigin(origin[0], origin[1]);
+        this.marcador.setStroke(stroke, sizeStroke);
+        this.marcador.setShadow(shadowOsx, shadowOsy, shadowColor, 2, bool1, bool2);
+        //#de77ae
+
+        // if (!excepcionesString.includes(txt)) this.texto.setX(centrar_txt(this.texto, args[12] * args[13]));
+
+        this.elastic(txt, elastic, dura);
 
         console.log(this.marcador);
     }
@@ -30,6 +40,20 @@ export class Marcador
     update(txt, valor)
     {
         this.marcador.setText(`${txt}${valor}`);
+    }
+
+    elastic(txt, elastic, dura)
+    {
+        if (dura > 0)
+        {
+            this.relatedScene.tweens.add(
+            {
+                targets: this.marcador,
+                y: elastic,
+                ease: 'Elastic',
+                duration: dura
+            });
+        }
     }
 
     get()

@@ -35,26 +35,7 @@ export class Game extends Scene
     this.diana = new Diana(this);
     this.jugadoranima = new JugadorAnima(this);
 
-    const ancho = this.sys.game.config.width;
-    const alto = this.sys.game.config.height;
-
-    this.marcadorPtos = new Marcador(this, {
-      x: 10, y: -50, size: 35, txt: ' Puntos: ', color: '#adf', id: 0
-    });
-
-    this.marcadorIncPtos = new Marcador(this, {
-      x: Math.floor(ancho / 2.8), y: -50, size: 35, txt: ' ', color: '#aff', id: 0
-    });
-
-    this.marcadorHi = new Marcador(this, {
-      x: Math.floor(ancho / 2), y: -50, size: 35, txt: ' Record: ', color: '#8df', id: 2
-    });
-
-    this.botonfullscreen = new BotonFullScreen(this, {
-      id: 'boton-fullscreen', x: Math.floor(this.sys.game.config.width / 1.1), y: -25,
-      ang: 0, scX: 0.8, scY: 0.6 
-    });
-
+    this.instancia_marcadores();
     this.botonrejugar = new BotonNuevaPartida(this);
     this.txt = new Textos(this);
   }
@@ -79,6 +60,7 @@ export class Game extends Scene
     this.marcadorPtos.create();
     this.marcadorIncPtos.create();
     this.marcadorHi.create();
+    this.marcadorHi.update(' Record: ', Settings.getRecord());
     this.botonfullscreen.create();
 
     this.texto_preparado();
@@ -104,15 +86,6 @@ export class Game extends Scene
     this.flecha.update();
   }
 
-  sonidos_set()
-  {
-    this.sonidoAplausosBirdie = this.sound.add('aplausos-birdie');
-    this.sonidoAplausosEagle = this.sound.add('aplausos-eagle');
-    this.sonidoAbucheo = this.sound.add('abucheo');
-    this.sonidoArrow1 = this.sound.add('arrow1');
-    this.sonidoArrow2 = this.sound.add('arrow2');
-  }
-  
   set_camerasMain()
   {
     const { numberWidths, numberHeights } = Settings.getScreen();
@@ -139,6 +112,50 @@ export class Game extends Scene
     this.mapa_scores.scrollY = scrollY;
     this.mapa_scores.setBackgroundColor(0x00aabb);
     console.log(this.mapa_scores);
+  }
+
+  instancia_marcadores()
+  {
+    const ancho = this.sys.game.config.width;
+    const alto = 55;
+
+    this.marcadorPtos = new Marcador(this, {
+      x: 0,
+      y: -alto,
+      txt: ' Score: 0',
+      size: 35, color: '#ffa', style: 'bold',
+      stroke: '#f91', sizeStroke: 10,
+      shadowOsx: 2, shadowOsy: 2, shadowColor: '#111',
+      bool1: false, bool2: true, origin: [0, 0],
+      elastic: false, dura: 0
+    });
+
+    this.marcadorIncPtos = new Marcador(this, {
+      x: Math.floor(ancho / 2.6),
+      y: -alto - 3,
+      txt: ' 0 ',
+      size: 45, color: '#ffa', style: 'bold',
+      stroke: '#4f2', sizeStroke: 14,
+      shadowOsx: 2, shadowOsy: 2, shadowColor: '#111',
+      bool1: false, bool2: true, origin: [0, 0],
+      elastic: false, dura: 0
+    });
+
+    this.marcadorHi = new Marcador(this, {
+      x: Math.floor(ancho / 1.7),
+      y: -alto,
+      txt: ' Record: ',
+      size: 35, color: '#ffa', style: 'bold',
+      stroke: '#f51', sizeStroke: 10,
+      shadowOsx: 2, shadowOsy: 2, shadowColor: '#111',
+      bool1: false, bool2: true, origin: [0, 0],
+      elastic: false, dura: 0
+    });
+
+    this.botonfullscreen = new BotonFullScreen(this, {
+      id: 'boton-fullscreen', x: Math.floor(this.sys.game.config.width / 1), y: -25,
+      ang: 0, scX: 0.8, scY: 0.6 
+    });
   }
 
   nextFlecha_cambioCamera(flecha, puntuacion, clavarDiana)
@@ -186,18 +203,18 @@ export class Game extends Scene
     Settings.setIncPuntos(calculaIncPtos);
     this.marcadorIncPtos.update(' ', calculaIncPtos);
     Settings.setPuntos(Settings.getPuntos() + calculaIncPtos);
-    this.marcadorPtos.update(' Puntos: ', Settings.getPuntos());
+    this.marcadorPtos.update(' Score: ', Settings.getPuntos());
 
     console.log(puntuacion, calculaIncPtos);
   }
 
   suenan_aplausos(flecha)
   {
-    if (Settings.getPuntos() >= 400)
+    if (Settings.getPuntos() >= Settings.getAplausos().aplausos)
     {
       play_sonidos(this.sonidoAplausosEagle, false, 0.9);
     
-    } else if (Settings.getPuntos() >= 200)
+    } else if (Settings.getPuntos() >= Settings.getAplausos().abucheos)
     {
       play_sonidos(this.sonidoAplausosBirdie, false, 0.9);
 
@@ -211,8 +228,9 @@ export class Game extends Scene
     setTimeout(() =>
     {
       this.botonrejugar.create('prenivel', true);
-      this.botonrejugar.get().setX(flecha.x);
-
+      // this.botonrejugar.get().setX(flecha.x);
+      this.botonrejugar.get().setX(this.diana.get().getChildren()[0].x);
+      this.cameras.main.startFollow(this.diana.get().getChildren()[0]);
     }, Settings.pausas.flechaClavada);
   }
 
@@ -247,6 +265,15 @@ export class Game extends Scene
     this.txt.get().setVisible(false);
 
     setTimeout(() => this.txt.get().destroy(), Settings.pausas.showTxtInicial);
+  }
+
+  sonidos_set()
+  {
+    this.sonidoAplausosBirdie = this.sound.add('aplausos-birdie');
+    this.sonidoAplausosEagle = this.sound.add('aplausos-eagle');
+    this.sonidoAbucheo = this.sound.add('abucheo');
+    this.sonidoArrow1 = this.sound.add('arrow1');
+    this.sonidoArrow2 = this.sound.add('arrow2');
   }
 
   pointer_showXY({create, show_mouseXY})
