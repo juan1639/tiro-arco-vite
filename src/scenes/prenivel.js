@@ -26,8 +26,8 @@ export class Prenivel extends Scene
         this.txt = new Textos(this, {
             x: Math.floor(this.sys.game.config.width / 20),
             y: Math.floor(this.sys.game.config.height / 20),
-            txt: ' Pulsa y deja pulsada la tecla\n Space o si utilizas un dispositivo\n tactil toca y deja presionada\n para tirar una flecha.',
-            size: 40, color: '#ffa', style: 'bold',
+            txt: ' Press and keep press space bar\n or if you use a touch device,\n touch and keep touch\n to shoot an arrow.',
+            size: 38, color: '#ffa', style: 'bold',
             stroke: '#2f2', sizeStroke: 16,
             shadowOsx: 2, shadowOsy: 2, shadowColor: '#111',
             bool1: false, bool2: true, origin: [0, 0],

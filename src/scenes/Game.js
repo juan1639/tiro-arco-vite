@@ -179,7 +179,7 @@ export class Game extends Scene
   {
     play_sonidos(this.sonidoArrow2, false, 0.9);
 
-    flecha.setX(flecha.x + flecha.getData('ajuste-clavar-diana'));
+    flecha.setX(Math.floor(flecha.x) + flecha.getData('ajuste-clavar-diana'));
 
     const calculaIncPtos = (Settings.diana.nroElementos - puntuacion) * 5 + Phaser.Math.Between(0, 2);
 

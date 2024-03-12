@@ -62,12 +62,12 @@ export class Flecha
 
             fl.setCircle(
                 radioCirculoColision,
-                fl.body.width - radioCirculoColision * 2,
+                Math.floor(fl.body.width / 1.8),
                 Math.floor(fl.body.height / 2 - radioCirculoColision)
             );
             fl.setCollideWorldBounds(true);
             fl.body.setAllowGravity(false);
-            fl.setData('ajuste-clavar-diana', 20);
+            fl.setData('ajuste-clavar-diana', 0);
             fl.setData('angulo', 7);
             fl.setData('ajuste-division-angulo', 20);
             fl.setData('estado', 'null'); // null / pre / lanzando / clavada
