@@ -58,8 +58,8 @@ export class Preload extends Scene
         this.load.image('barra-fuerza', './img/barra-energia.png');
         this.load.image('diana', './img/diana-tiroArco.png');
 
-        // scene.load.image('arco', './src/img/arco1.png');
-        this.load.image('arco', './img/arco-v2.png');
+        // this.load.image('arco', './img/arco-v2.png');
+        this.load.spritesheet('arco', './img/arco-v3-ssheet.png', {frameWidth: 75, frameHeight: 100});
         // scene.load.image('flecha', './src/img/flecha.png');
         this.load.image('flecha', './img/flecha-v2.png');
         this.load.image('flecha-c', './img/flecha-c.png');

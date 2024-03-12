@@ -77,6 +77,8 @@ export class Jugador
             this.jugador.setData('fin-pulsacion', true);
             this.jugador.setData('ini-pulsacion', false);
 
+            this.relatedScene.arco.get().setFrame(1);
+
             this.relatedScene.flecha.get().getChildren()[Settings.flecha.lanzamientoNro]
                 .setData('estado', 'lanzando');
 

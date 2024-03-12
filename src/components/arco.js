@@ -10,7 +10,7 @@ export class Arco
 
     create(x, y)
     {
-        this.arco = this.relatedScene.physics.add.sprite(x, y, 'arco');
+        this.arco = this.relatedScene.physics.add.sprite(x, y, 'arco', 0);
 
         this.arco.setVisible(false).setScale(1, 0.8).setDepth(Settings.depth.arco);
         this.arco.body.setAllowGravity(false);

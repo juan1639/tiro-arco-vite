@@ -179,6 +179,7 @@ export class Game extends Scene
       {
         this.flecha.get().getChildren()[Settings.flecha.lanzamientoNro].setData('estado', 'pre');
         this.cameras.main.startFollow(this.flecha.get().getChildren()[Settings.flecha.lanzamientoNro]);
+        this.arco.get().setFrame(0);
       }
     }, Settings.pausas.flechaClavada);
 
