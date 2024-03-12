@@ -1,15 +1,14 @@
 import { play_sonidos } from "../functions/functions.js";
 
-// ==================================================================================
-export class BotonNuevaPartida {
-
-  // --------------------------------------------------------
-  constructor(scene) {
+export class BotonNuevaPartida
+{
+  constructor(scene)
+  {
     this.relatedScene = scene;
   }
 
-  create(siguienteScene, gameover) {
-
+  create(siguienteScene, gameover)
+  {
     // this.sonidoMenuSelect = this.relatedScene.sound.add('moneda-mario');
 
     const ancho = this.relatedScene.sys.game.config.width;
@@ -40,7 +39,8 @@ export class BotonNuevaPartida {
       console.log(e);
     });
 
-    this.relatedScene.tweens.add({
+    this.relatedScene.tweens.add(
+    {
       targets: this.boton,
       angle: 359,
       ease: 'Elastic',
@@ -51,22 +51,23 @@ export class BotonNuevaPartida {
     });
   }
 
-  get() {
+  get()
+  {
     return this.boton;
   }
 }
 
 // ==================================================================================
-export class BotonFullScreen {
-
-  // --------------------------------------------------------
-  constructor(scene, direccion) {
+export class BotonFullScreen
+{
+  constructor(scene, direccion)
+  {
     this.relatedScene = scene;
     this.direccion = direccion;
   }
 
-  create() {
-
+  create()
+  {
     const ancho = this.relatedScene.sys.game.config.width;
     const alto = this.relatedScene.sys.game.config.height;
 
@@ -75,20 +76,26 @@ export class BotonFullScreen {
     this.boton.setAngle(this.direccion.ang).setFrame(0).setDepth(50);
     this.boton.setX(this.direccion.x).setY(this.direccion.y);
 
-    this.boton.on('pointerover', () => {
+    this.boton.on('pointerover', () =>
+    {
       // this.boton.setFrame(1);
       this.boton.setScale(this.direccion.scX + 0.1, this.direccion.scY + 0.1);
     });
     
-    this.boton.on('pointerout', () => {
+    this.boton.on('pointerout', () =>
+    {
       // this.boton.setFrame(0);
       this.boton.setScale(this.direccion.scX, this.direccion.scY);
     });
 
-    this.boton.on('pointerdown', () => {
-      if (!this.relatedScene.scale.isFullscreen) {
+    this.boton.on('pointerdown', () =>
+    {
+      if (!this.relatedScene.scale.isFullscreen)
+      {
         this.relatedScene.scale.startFullscreen();
-      } else {
+
+      } else
+      {
         this.relatedScene.scale.stopFullscreen();
       }
     });

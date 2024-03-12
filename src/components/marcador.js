@@ -1,15 +1,15 @@
 import { Settings } from "../scenes/settings.js";
 
-// ===========================================================================
-export class Marcador {
-
-    constructor(scene, datos) {
+export class Marcador
+{
+    constructor(scene, datos)
+    {
         this.relatedScene = scene;
         this.datos = datos;
     }
 
-    create() {
-
+    create()
+    {
         const { x, y, size, txt, color, id } = this.datos;
 
         let texto = '';
@@ -27,12 +27,13 @@ export class Marcador {
         console.log(this.marcador);
     }
 
-    update(txt, valor) {
-
+    update(txt, valor)
+    {
         this.marcador.setText(`${txt}${valor}`);
     }
 
-    get() {
+    get()
+    {
         return this.marcador;
     }
 }

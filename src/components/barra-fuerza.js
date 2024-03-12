@@ -1,14 +1,16 @@
 import { dibuja_rectangulos } from "../functions/functions.js";
 import { Settings } from "../scenes/settings.js";
 
-export class BarraFuerza {
+export class BarraFuerza
+{
 
-    constructor(scene) {
+    constructor(scene)
+    {
         this.relatedScene = scene;
     }
 
-    create() {
-
+    create()
+    {
         dibuja_rectangulos(this.relatedScene, {
             x: Settings.barraFuerza.x,
             y: Settings.barraFuerza.y,
@@ -25,7 +27,8 @@ export class BarraFuerza {
         this.barrafuerza.setX(Settings.barraFuerza.x).setY(Settings.barraFuerza.y);
     }
     
-    get() {
+    get()
+    {
         return this.barrafuerza;
     }
 }

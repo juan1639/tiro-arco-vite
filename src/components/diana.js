@@ -1,19 +1,20 @@
 import { Settings } from "../scenes/settings.js";
 
-export class Diana {
-
-    constructor(scene) {
+export class Diana
+{
+    constructor(scene)
+    {
         this.relatedScene = scene;
     }
 
-    create() {
-
+    create()
+    {
         const randomDiana = Phaser.Math.Between(0, this.relatedScene.sys.game.config.width);
 
         this.diana = this.relatedScene.physics.add.group();
 
-        for (let i = 0; i < Settings.diana.nroElementos; i ++) {
-
+        for (let i = 0; i < Settings.diana.nroElementos; i ++)
+        {
             this.diana.create(
                 Settings.diana.x - randomDiana + i * Settings.diana.ancho,
                 Settings.diana.y,
@@ -26,8 +27,8 @@ export class Diana {
             0xee1000, 0xee1000, 0xee1000, 0xee1000, 0x10aa20, 0x10aa20, 0x10aa20, 0x10aa20
         ];
 
-        this.diana.children.iterate((dia, index) => {
-
+        this.diana.children.iterate((dia, index) =>
+        {
             dia.setData('index', index);
             dia.setScale(1, 1 * (index / 10));
             dia.setDepth(Settings.depth.diana).setTint(this.coloresAreasImpacto[index]);
@@ -39,10 +40,10 @@ export class Diana {
         console.log(this.diana);
     }
 
-    update() {
-    }
+    update() {}
     
-    get() {
+    get()
+    {
         return this.diana;
     }
 }

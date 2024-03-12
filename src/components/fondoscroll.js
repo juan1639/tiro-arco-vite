@@ -1,14 +1,14 @@
 import { Settings } from "../scenes/settings.js";
 
-// ================================================================================
-export class FondoScroll {
-
-    constructor(scene) {
+export class FondoScroll
+{
+    constructor(scene)
+    {
         this.relatedScene = scene;
     }
 
-    create() {
-
+    create()
+    {
         this.fondoscroll = this.relatedScene.add.image(
             -this.relatedScene.sys.game.config.width, 0, 'fondo-scroll'
         ).setOrigin(0, 0).setDepth(Settings.depth.fondoScroll);
@@ -16,7 +16,8 @@ export class FondoScroll {
         console.log(this.fondoscroll);
     }
     
-    get() {
+    get()
+    {
         return this.fondoscroll;
     }
 }

@@ -1,14 +1,15 @@
 import { dibuja_rectangulos } from "../functions/functions.js";
 import { Settings } from "../scenes/settings.js";
 
-export class Arco {
-
-    constructor(scene) {
+export class Arco
+{
+    constructor(scene)
+    {
         this.relatedScene = scene;
     }
 
-    create(x, y) {
-
+    create(x, y)
+    {
         this.arco = this.relatedScene.physics.add.sprite(x, y, 'arco');
 
         this.arco.setVisible(false).setScale(1, 0.8).setDepth(Settings.depth.arco);
@@ -17,32 +18,34 @@ export class Arco {
         console.log(this.arco);
     }
 
-    update(x, y) {
-
+    update(x, y)
+    {
         const updateX = x + 1;
         const updateY = y + 12;
 
         this.arco.setX(updateX).setY(updateY);
     }
 
-    get() {
+    get()
+    {
         return this.arco;
     }
 }
 
 // =========================================================================
-export class Flecha {
-
-    constructor(scene) {
+export class Flecha
+{
+    constructor(scene)
+    {
         this.relatedScene = scene;
     }
 
-    create() {
-
+    create()
+    {
         this.flecha = this.relatedScene.physics.add.group();
 
-        for (let i = 0; i < Settings.flecha.nroFlechas; i ++) {
-
+        for (let i = 0; i < Settings.flecha.nroFlechas; i ++)
+        {
             this.flecha.create(
                 Settings.flecha.iniX,
                 Settings.flecha.iniY + i * 20,
@@ -76,23 +79,25 @@ export class Flecha {
         console.log(this.flecha);
     }
 
-    update() {
-
-        this.flecha.children.iterate(fl => {
-
-            if (fl.getData('estado') === 'pre') {
+    update()
+    {
+        this.flecha.children.iterate(fl =>
+        {
+            if (fl.getData('estado') === 'pre') 
+            {
                 fl.setX(this.relatedScene.sys.game.config.width / 10 + Settings.flecha.offSetX);
                 fl.setY(this.relatedScene.sys.game.config.height - Settings.flecha.offSetY);
             }
 
-            if (fl.getData('estado') === 'lanzando') {
-
+            if (fl.getData('estado') === 'lanzando')
+            {
                 fl.setAngle(fl.body.velocity.y / fl.getData('ajuste-division-angulo'));
             }
         });
     }
     
-    get() {
+    get()
+    {
         return this.flecha;
     }
 }

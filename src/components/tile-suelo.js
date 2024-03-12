@@ -1,15 +1,16 @@
 import { Settings } from "../scenes/settings.js";
 
-export class TileSuelo {
-
+export class TileSuelo
+{
     static sizeXY = [64, 64];
 
-    constructor(scene) {
+    constructor(scene)
+    {
         this.relatedScene = scene;
     }
 
-    create() {
-
+    create()
+    {
         const posY = this.relatedScene.sys.game.config.height;
 
         this.tilesuelo = this.relatedScene.physics.add.sprite(
@@ -23,7 +24,8 @@ export class TileSuelo {
         console.log(this.tilesuelo);
     }
 
-    get() {
+    get()
+    {
         return this.tilesuelo;
     }
 }

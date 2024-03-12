@@ -1,6 +1,6 @@
 
-export class Settings {
-
+export class Settings
+{
     static controlElegido = {
         teclado: false,
         mobile: true
@@ -79,60 +79,74 @@ export class Settings {
     };
 
     // -----------------------------------------------
-    static isAnimaInicial() {
+    static isAnimaInicial()
+    {
         return Settings.animaInicial;
     }
 
-    static isGameOver() {
+    static isGameOver()
+    {
         return Settings.gameOver;
     }
 
-    static getScreen() {
+    static getScreen()
+    {
         return Settings.screen;
     }
 
-    static getPuntos() {
+    static getPuntos()
+    {
         return Settings.puntos;
     }
 
-    static getIncPuntos() {
+    static getIncPuntos()
+    {
         return Settings.incPuntos;
     }
 
-    static getRecord() {
+    static getRecord()
+    {
         return Settings.hi;
     }
 
-    static getCameraScores() {
+    static getCameraScores()
+    {
         return Settings.cameraScores;
     }
 
-    static getFlechaNro() {
+    static getFlechaNro()
+    {
         return Settings.flecha.lanzamientoNro;
     }
 
     // -----------------------------------------------
-    static setAnimaInicial(bool) {
+    static setAnimaInicial(bool)
+    {
         Settings.animaInicial = bool;
     }
 
-    static setGameOver(bool) {
+    static setGameOver(bool)
+    {
         Settings.gameOver = bool;
     }
 
-    static setPuntos(ptos) {
+    static setPuntos(ptos)
+    {
         Settings.puntos = ptos;
     }
 
-    static setIncPuntos(incPtos) {
+    static setIncPuntos(incPtos)
+    {
         Settings.incPuntos = incPtos;
     }
 
-    static setRecord(hiScore) {
+    static setRecord(hiScore)
+    {
         Settings.hi = hiScore;
     }
 
-    static setCameraScores(x, y, ancho, alto, scrollX, scrollY) {
+    static setCameraScores(x, y, ancho, alto, scrollX, scrollY)
+    {
         Settings.cameraScores.x = x;
         Settings.cameraScores.y = y;
         Settings.cameraScores.ancho = ancho;
@@ -141,7 +155,8 @@ export class Settings {
         Settings.cameraScores.scrollY = scrollY;
     }
 
-    static setFlechaNro(reset) {
+    static setFlechaNro(reset)
+    {
         Settings.flecha.lanzamientoNro = reset;
     }
 }

@@ -6,14 +6,14 @@ import { Jugador } from '../components/jugador.js';
 import { BotonNuevaPartida } from '../components/boton-nuevapartida.js';
 import { Settings } from './settings.js';
 
-export class Prenivel extends Scene {
-
+export class Prenivel extends Scene
+{
     constructor() {
         super({ key: 'prenivel' });
     }
 
-    init() {
-
+    init()
+    {
         Settings.setPuntos(0);
         Settings.setIncPuntos(0);
         Settings.setAnimaInicial(true);
@@ -26,8 +26,8 @@ export class Prenivel extends Scene {
         this.botoninicio = new BotonNuevaPartida(this);
     }
 
-    create() {
-
+    create()
+    {
         this.fondoscroll.create();
         // this.jugador.create(this.scene.key);
 
@@ -35,7 +35,8 @@ export class Prenivel extends Scene {
         const left = Math.floor(this.sys.game.config.width / 5.2);
         const top = Math.floor(this.sys.game.config.height / 4);
 
-        this.txt.create({
+        this.txt.create(
+        {
             x: left, y: top, texto: ' Pulsa y deja pulsada la tecla\n Space o si utilizas un dispositivo\n tactil toca y deja presionada\n para tirar una flecha.',
             size: 30, style: 'bold', oofx: 1, offy: 1, col: '#fff', blr: 15,
             fillShadow: true, fll: '#3a1', family: 'verdana, arial, sans-serif',

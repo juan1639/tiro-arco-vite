@@ -1,14 +1,15 @@
 import { centrar_txt } from "../functions/functions.js";
 import { Settings } from "../scenes/settings.js";
 
-export class Textos {
-
-    constructor(scene) {
+export class Textos
+{
+    constructor(scene)
+    {
         this.relatedScene = scene;
     }
 
-    create(args) {
-
+    create(args)
+    {
         const {
             x, y,
             texto,
@@ -39,6 +40,7 @@ export class Textos {
             fill: fll,
             fontFamily: family
         });
+
         this.txt.setDepth(Settings.depth.textos);
 
         this.centrar(texto, screenWidth, multip);
@@ -47,14 +49,14 @@ export class Textos {
         console.log(this.txt);
     }
 
-    crear_tweens(texto) {
-
+    crear_tweens(texto)
+    {
         const array_tweens = [
             ' Preparado... '
         ];
 
-        array_tweens.forEach(tween => {
-
+        array_tweens.forEach(tween =>
+        {
             if (tween.slice(0, 5) === texto.slice(0, 5)) {
 
                 this.relatedScene.tweens.add({
@@ -71,8 +73,8 @@ export class Textos {
             ' Tiro con Arco '
         ];
 
-        array_tweens2.forEach(tween => {
-
+        array_tweens2.forEach(tween =>
+        {
             if (tween === texto) {
 
                 this.relatedScene.tweens.add({
@@ -85,19 +87,21 @@ export class Textos {
         });
     }
 
-    centrar(texto, screenWidth, multip) {
-
+    centrar(texto, screenWidth, multip)
+    {
         const centrarTxt = [
             ' Tiro con Arco ',
             ' Game Over '
         ];
 
-        centrarTxt.forEach(centra => {
+        centrarTxt.forEach(centra =>
+        {
             if (texto.slice(0, 5) === centra.slice(0, 5)) this.txt.setX(centrar_txt(this.txt, screenWidth * multip));
         });
     }
 
-    get() {
+    get()
+    {
         return this.txt;
     }
 }

@@ -1,14 +1,15 @@
 import { play_sonidos } from "../functions/functions.js";
 import { Settings } from "../scenes/settings.js";
 
-export class Jugador {
-
-    constructor(scene) {
+export class Jugador
+{
+    constructor(scene)
+    {
         this.relatedScene = scene;
     }
 
-    create() {
-
+    create()
+    {
         this.jugador = this.relatedScene.physics.add.sprite(
             this.relatedScene.sys.game.config.width / Settings.jugador.offSetX,
             this.relatedScene.sys.game.config.height - Settings.jugador.offSetY,
@@ -29,8 +30,8 @@ export class Jugador {
         console.log(this.jugador);
     }
 
-    update() {
-
+    update()
+    {
         if (Settings.isGameOver()) return;
 
         this.incrementando_fuerza_pulsando();
@@ -38,43 +39,41 @@ export class Jugador {
         this.soltar_lanzarFlecha();
     }
 
-    incrementando_fuerza_pulsando() {
-
+    incrementando_fuerza_pulsando()
+    {
         if ((this.jugador.getData('ini-pulsacion') && !this.jugador.getData('fin-pulsacion') && Settings.controlElegido.teclado) ||
             (this.jugador.getData('ini-pulsacion') &&
             !this.jugador.getData('fin-pulsacion') &&
             this.relatedScene.input.activePointer.isDown &&
             Settings.controlElegido.mobile)
         ){
-
             console.log('...sum');
             this.jugador.setData('pow', this.jugador.getData('pow') + this.jugador.getData('inc-pow'));
             this.relatedScene.barrafuerza.get().setScale(this.jugador.getData('pow'), 1);
         }
     }
 
-    pulsacion_inicial() {
-
+    pulsacion_inicial()
+    {
         if (this.jugador.body.touching.down &&
             !this.jugador.getData('fin-pulsacion') &&
             !this.jugador.getData('ini-pulsacion') &&
             (this.relatedScene.flecha.get().getChildren()[Settings.flecha.lanzamientoNro].getData('estado') === 'pre') &&
             ((this.controles.space.isDown && Settings.controlElegido.teclado) || (this.relatedScene.input.activePointer.isDown && Settings.controlElegido.mobile))
-        ) {
-
+        ){
             console.log('pulsando...');
             this.jugador.setData('ini-pulsacion', true);
         }
     }
 
-    soltar_lanzarFlecha() {
-
+    soltar_lanzarFlecha()
+    {
         if (this.jugador.body.touching.down &&
             !this.jugador.getData('fin-pulsacion') &&
             this.jugador.getData('ini-pulsacion') &&
             (this.relatedScene.flecha.get().getChildren()[Settings.flecha.lanzamientoNro].getData('estado') === 'pre') &&
             ((this.controles.space.isUp && Settings.controlElegido.teclado) || (!this.relatedScene.input.activePointer.isDown && Settings.controlElegido.mobile))
-        ) {
+        ){
             this.jugador.setData('fin-pulsacion', true);
             this.jugador.setData('ini-pulsacion', false);
 
@@ -96,20 +95,22 @@ export class Jugador {
         }
     }
 
-    get() {
+    get()
+    {
         return this.jugador;
     }
 }
 
 // ===========================================================================
-export class JugadorAnima {
-
-    constructor(scene) {
+export class JugadorAnima
+{
+    constructor(scene)
+    {
         this.relatedScene = scene;
     }
 
-    create() {
-
+    create()
+    {
         this.jugadoranima = this.relatedScene.physics.add.sprite(
             this.relatedScene.diana.get().getChildren()[0].x - 100,
             this.relatedScene.sys.game.config.height - Settings.jugador.offSetY,
@@ -120,7 +121,8 @@ export class JugadorAnima {
         this.jugadoranima.setFrame(10).setFlipX(true).setDepth(Settings.depth.jugador);
         this.jugadoranima.setVelocityX(-200);
 
-        this.relatedScene.anims.create({
+        this.relatedScene.anims.create(
+        {
             key: 'jugador-anima-inicial',
             frames: this.relatedScene.anims.generateFrameNumbers('jugador', {frames: [9, 10]}),
             frameRate: 10,
@@ -132,9 +134,10 @@ export class JugadorAnima {
         console.log(this.jugadoranima);
     }
 
-    update() {
-
-        if (this.jugadoranima.x <= this.relatedScene.sys.game.config.width / Settings.jugador.offSetX) {
+    update()
+    {
+        if (this.jugadoranima.x <= this.relatedScene.sys.game.config.width / Settings.jugador.offSetX)
+        {
             Settings.setAnimaInicial(false);
             this.jugadoranima.destroy();
 
@@ -150,7 +153,8 @@ export class JugadorAnima {
         }
     }
 
-    get() {
+    get()
+    {
         return this.jugadoranima;
     }
 }
