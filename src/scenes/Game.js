@@ -1,5 +1,7 @@
 // =========================================================================================
-//  T i r o  c o n  A r c o
+//    T i r o  c o n  A r c o  |  By Juan Eguia
+//  
+//    https://juan1639.github.io/tiro-arco-vite
 // 
 // -----------------------------------------------------------------------------------------
 import { Scene } from 'phaser';
@@ -150,13 +152,14 @@ export class Game extends Scene
 
       this.barrafuerza.get().setScale(0.1, 1);
 
-      if (Settings.flecha.lanzamientoNro >= 10) {
-
+      if (Settings.flecha.lanzamientoNro >= 10)
+      {
         console.log('game over');
         Settings.setGameOver(true);
         this.suenan_aplausos(flecha);
 
-      } else {
+      } else
+      {
         this.flecha.get().getChildren()[Settings.flecha.lanzamientoNro].setData('estado', 'pre');
         this.cameras.main.startFollow(this.flecha.get().getChildren()[Settings.flecha.lanzamientoNro]);
       }
@@ -179,7 +182,7 @@ export class Game extends Scene
     flecha.setX(flecha.x + flecha.getData('ajuste-clavar-diana'));
 
     const calculaIncPtos = (Settings.diana.nroElementos - puntuacion) * 5 + Phaser.Math.Between(0, 2);
-
+    
     Settings.setIncPuntos(calculaIncPtos);
     this.marcadorIncPtos.update(' ', calculaIncPtos);
     Settings.setPuntos(Settings.getPuntos() + calculaIncPtos);

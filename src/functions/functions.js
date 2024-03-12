@@ -3,7 +3,7 @@ function dibuja_rectangulos(scene, args)
 {
   const {x, y, ancho, alto, pad} = args;
   
-  scene.add.rectangle(x - pad, y - pad, ancho + pad * 2, alto + pad * 2, 0x504000)
+  scene.add.rectangle(x - pad, y - pad, ancho + pad * 2, alto + pad * 2, 0x453500)
     .setStrokeStyle(3, 0xff9910).setOrigin(0, 0);
 }
 
