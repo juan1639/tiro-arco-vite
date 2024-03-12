@@ -223,7 +223,23 @@ export class Game extends Scene
       play_sonidos(this.sonidoAbucheo, false, 0.9);
     }
 
-    if (Settings.getPuntos() > Settings.getRecord()) Settings.setRecord(Settings.getPuntos());
+    if (Settings.getPuntos() > Settings.getRecord())
+    {
+      Settings.setRecord(Settings.getPuntos());
+
+      this.txtNewrecord = new Textos(this, {
+        x: Math.floor(this.diana.get().getChildren()[0].x),
+        y: 50,
+        txt: ' Congratulations! \n New Record! ',
+        size: 70, color: '#ffa', style: 'bold',
+        stroke: '#f91', sizeStroke: 16,
+        shadowOsx: 2, shadowOsy: 2, shadowColor: '#111',
+        bool1: false, bool2: true, origin: [0.5, 0],
+        elastic: this.sys.game.config.height / 2, dura: 3000
+      });
+  
+      this.txtNewrecord.create();
+    }
 
     setTimeout(() =>
     {

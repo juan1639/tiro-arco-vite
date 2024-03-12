@@ -2,7 +2,7 @@ import { Iniciar } from './scenes/iniciar.js';
 import { Preload } from './scenes/preload.js';
 import { MenuPrincipal } from './scenes/menuprincipal.js';
 import { Prenivel } from './scenes/prenivel.js';
-import { Game } from './scenes/game.js';
+import { Game } from './scenes/Game.js';
 
 const config = {
   type: Phaser.AUTO,
