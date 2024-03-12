@@ -1,107 +1,59 @@
-import { centrar_txt } from "../functions/functions.js";
-import { Settings } from "../scenes/settings.js";
+import { Settings } from '../scenes/settings.js';
 
 export class Textos
 {
-    constructor(scene)
+    constructor(scene, datos)
     {
         this.relatedScene = scene;
+        this.datos = datos;
     }
 
-    create(args)
+    create()
     {
         const {
-            x, y,
-            texto,
-            size,
-            style,
-            offx, offy,
-            col,
-            blr,
-            fillShadow,
-            fll,
-            family,
-            screenWidth,
-            multip
-        } = args;
+            x, y, txt,
+            size, color, style,
+            stroke, sizeStroke,
+            shadowOsx, shadowOsy, shadowColor,
+            bool1, bool2, origin,
+            elastic, dura
+        } = this.datos;
 
-        console.log(args);
-
-        this.txt = this.relatedScene.add.text(x, y, texto, {
+        this.texto = this.relatedScene.add.text(x, y, txt, {
             fontSize: size + 'px',
-            fontStyle: style,
-            shadow: {
-                offsetX: offx,
-                offsetY: offy,
-                color: col,
-                blur: blr,
-                fill: fillShadow
-            },
-            fill: fll,
-            fontFamily: family
+            fill: color,
+            fontFamily: 'verdana, arial, sans-serif',
+            fontStyle: style
         });
 
-        this.txt.setDepth(Settings.depth.textos);
+        this.texto.setOrigin(origin[0], origin[1]);
+        this.texto.setStroke(stroke, sizeStroke);
+        this.texto.setShadow(shadowOsx, shadowOsy, shadowColor, 2, bool1, bool2);
+        //#de77ae
 
-        this.centrar(texto, screenWidth, multip);
-        this.crear_tweens(texto);
+        // if (!excepcionesString.includes(txt)) this.texto.setX(centrar_txt(this.texto, args[12] * args[13]));
 
-        console.log(this.txt);
+        this.elastic(txt, elastic, dura);
+
+        console.log(this.texto);
     }
-
-    crear_tweens(texto)
+    
+    elastic(txt, elastic, dura)
     {
-        const array_tweens = [
-            ' Preparado... '
-        ];
-
-        array_tweens.forEach(tween =>
+        if (dura > 0)
         {
-            if (tween.slice(0, 5) === texto.slice(0, 5)) {
-
-                this.relatedScene.tweens.add({
-                    targets: this.txt,
-                    alpha: 0,
-                    ease: 'easeOut',
-                    duration: 1500
-                });
-            }
-        });
-
-        // ----------------------------------------------
-        const array_tweens2 = [
-            ' Tiro con Arco '
-        ];
-
-        array_tweens2.forEach(tween =>
-        {
-            if (tween === texto) {
-
-                this.relatedScene.tweens.add({
-                    targets: this.txt,
-                    y: Math.floor(this.relatedScene.sys.game.config.height / 5),
-                    ease: 'Elastic',
-                    duration: 2000
-                });
-            }
-        });
-    }
-
-    centrar(texto, screenWidth, multip)
-    {
-        const centrarTxt = [
-            ' Tiro con Arco ',
-            ' Game Over '
-        ];
-
-        centrarTxt.forEach(centra =>
-        {
-            if (texto.slice(0, 5) === centra.slice(0, 5)) this.txt.setX(centrar_txt(this.txt, screenWidth * multip));
-        });
+            this.relatedScene.tweens.add(
+            {
+                targets: this.texto,
+                y: elastic,
+                ease: 'Elastic',
+                duration: dura
+            });
+        }
     }
 
     get()
     {
-        return this.txt;
+        return this.texto;
     }
 }

@@ -182,7 +182,7 @@ export class Game extends Scene
     flecha.setX(flecha.x + flecha.getData('ajuste-clavar-diana'));
 
     const calculaIncPtos = (Settings.diana.nroElementos - puntuacion) * 5 + Phaser.Math.Between(0, 2);
-    
+
     Settings.setIncPuntos(calculaIncPtos);
     this.marcadorIncPtos.update(' ', calculaIncPtos);
     Settings.setPuntos(Settings.getPuntos() + calculaIncPtos);
@@ -232,18 +232,19 @@ export class Game extends Scene
 
   texto_preparado()
   {
-    const left = Math.floor(this.sys.game.config.width / 2.2);
-    const top = Math.floor(this.sys.game.config.height / 2);
-
-    this.txt.create(
-    {
-        x: left, y: top, texto: ' Pulse y mantenga pulsado \n para tirar una flecha... ',
-        size: 30, style: 'bold', oofx: 1, offy: 1, col: '#fff', blr: 15,
-        fillShadow: true, fll: '#3a1', family: 'verdana, arial, sans-serif',
-        screenWidth: this.sys.game.config.width, multip: 1
+    this.txt = new Textos(this, {
+      x: Math.floor(this.sys.game.config.width / 5),
+      y: Math.floor(this.sys.game.config.height / 2),
+      txt: ' Pulsa y deja pulsada la tecla space \n o si utilizas un dispositivo tactil \n toca y deja presionada \n para tirar una flecha.',
+      size: 25, color: '#ffa', style: 'bold',
+      stroke: '#2f2', sizeStroke: 16,
+      shadowOsx: 2, shadowOsy: 2, shadowColor: '#111',
+      bool1: false, bool2: true, origin: [0.5, 0.5],
+      elastic: false, dura: 0
     });
 
-    this.txt.get().setVisible(false).setX(0);
+    this.txt.create();
+    this.txt.get().setVisible(false);
 
     setTimeout(() => this.txt.get().destroy(), Settings.pausas.showTxtInicial);
   }

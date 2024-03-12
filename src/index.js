@@ -1,4 +1,5 @@
 import { Iniciar } from './scenes/iniciar.js';
+import { Preload } from './scenes/preload.js';
 import { MenuPrincipal } from './scenes/menuprincipal.js';
 import { Prenivel } from './scenes/prenivel.js';
 import { Game } from './scenes/game.js';
@@ -8,7 +9,7 @@ const config = {
   width: 800,
   height: 600,
   parent: 'game-container',
-  scene: [Iniciar, MenuPrincipal, Prenivel, Game],
+  scene: [Iniciar, Preload, MenuPrincipal, Prenivel, Game],
   physics: {
     default: 'arcade',
     arcade: {
