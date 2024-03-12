@@ -54,6 +54,7 @@ export class Flecha {
 
             fl.setScale(1, 1).setAngle(0).setDepth(Settings.depth.flecha);
             fl.setVelocityX(0).setVelocityY(0);
+            fl.setCircle(2, 98, 2);
             fl.setCollideWorldBounds(true);
             fl.body.setAllowGravity(false);
             fl.setData('ajuste-clavar-diana', 20);
