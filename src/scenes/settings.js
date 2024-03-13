@@ -2,8 +2,8 @@
 export class Settings
 {
     static controlElegido = {
-        teclado: false,
-        mobile: true
+        mobile: true,
+        teclado: false
     };
 
     static screen = {

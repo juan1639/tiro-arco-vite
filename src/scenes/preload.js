@@ -52,6 +52,7 @@ export class Preload extends Scene
 
         this.load.image('boton-nueva-partida', './img/boton-start.png');
         this.load.spritesheet('boton-fullscreen', './img/boton-fullscreen.png', {frameWidth: 64, frameHeight: 64});
+        this.load.spritesheet('radio-buttons', './img/radio-buttons-ssheet.png', {frameWidth: 50, frameHeight: 50});
         this.load.image('archery-img', './img/archeryImg.png');
 
         this.load.image('tile-suelo', './img/tile-suelo.png');
